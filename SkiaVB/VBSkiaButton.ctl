@@ -1,12 +1,12 @@
 VERSION 5.00
 Begin VB.UserControl VBSkiaButton 
    BackColor       =   &H00F0F0F0&
-   ClientHeight    =   3600
+   ClientHeight    =   1515
    ClientLeft      =   0
    ClientTop       =   0
-   ClientWidth     =   4800
-   ScaleHeight     =   3600
-   ScaleWidth      =   4800
+   ClientWidth     =   2565
+   ScaleHeight     =   1515
+   ScaleWidth      =   2565
 End
 Attribute VB_Name = "VBSkiaButton"
 Attribute VB_GlobalNameSpace = False
@@ -52,7 +52,7 @@ Private Sub InitializeDefaults()
 2
 3         m_Text = "SkiaButton"
 4         m_BackColor = &H4285F4
-5         m_ForeColor = &HFFFFFF
+5         m_ForeColor = &HFFFFFFFF
 6         m_BorderColor = &H1976D2
 7         m_BorderWidth = 2
 8         m_CornerRadius = 8
@@ -92,11 +92,11 @@ Private Sub CreateComponents()
 7             With m_PictureBox
 8                 .Left = 0
 9                 .Top = 0
-10                .Width = 2500
-11                .Height = 800
+10                .Width = UserControl.Width
+11                .Height = UserControl.Height
 12                .BackColor = vbBlack
 13                .BorderStyle = 0
-14                .AutoRedraw = True
+14                .AutoRedraw = False
 15                .Visible = True
 16                .ScaleMode = vbTwips
 17            End With
@@ -122,7 +122,7 @@ End Sub
 Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
 1         m_Text = PropBag.ReadProperty("Text", "SkiaButton")
 2         m_BackColor = PropBag.ReadProperty("BackColor", &H4285F4)
-3         m_ForeColor = PropBag.ReadProperty("ForeColor", &HFFFFFF)
+3         m_ForeColor = PropBag.ReadProperty("ForeColor", &HFFFFFFFF)
 4         m_BorderColor = PropBag.ReadProperty("BorderColor", &H1976D2)
 5         m_BorderWidth = PropBag.ReadProperty("BorderWidth", 2)
 6         m_CornerRadius = PropBag.ReadProperty("CornerRadius", 8)
@@ -133,7 +133,7 @@ Private Sub UserControl_ReadProperties(PropBag As PropertyBag)
 11        m_UseGradient = PropBag.ReadProperty("UseGradient", False)
 12        m_GradientStartColor = PropBag.ReadProperty("GradientStartColor", &H6A5ACD)
 13        m_GradientEndColor = PropBag.ReadProperty("GradientEndColor", &H4169E1)
-          
+
 14        If m_Initialized Then
 15            RefreshButton
 16        End If
@@ -142,7 +142,7 @@ End Sub
 Private Sub UserControl_WriteProperties(PropBag As PropertyBag)
 1         PropBag.WriteProperty "Text", m_Text, "SkiaButton"
 2         PropBag.WriteProperty "BackColor", m_BackColor, &H4285F4
-3         PropBag.WriteProperty "ForeColor", m_ForeColor, &HFFFFFF
+3         PropBag.WriteProperty "ForeColor", m_ForeColor, &HFFFFFFFF
 4         PropBag.WriteProperty "BorderColor", m_BorderColor, &H1976D2
 5         PropBag.WriteProperty "BorderWidth", m_BorderWidth, 2
 6         PropBag.WriteProperty "CornerRadius", m_CornerRadius, 8
@@ -179,6 +179,9 @@ End Property
 
 Public Property Get BackColor() As Long
 1         BackColor = m_BackColor
+End Property
+Public Property Get MyPicture() As IPictureDisp
+1         MyPicture = m_PictureBox.picture
 End Property
 
 Public Property Let BackColor(ByVal NewColor As Long)
@@ -323,22 +326,21 @@ Private Sub RefreshButton()
     End If
     
     On Error GoTo ErrorHandler
-
+    
     With m_SkiaButton
         .Text = m_Text
-         
+
         .Width = m_PictureBox.ScaleWidth \ Screen.TwipsPerPixelX
         .Height = m_PictureBox.ScaleHeight \ Screen.TwipsPerPixelY
-  
+         
         .TextColor = ConvertColorToARGB(m_ForeColor, 255)
-
         .BorderColor = ConvertColorToARGB(m_BorderColor, 255)
         .BorderWidth = m_BorderWidth
         .CornerRadius = m_CornerRadius
-       
+
         .FontFamily = m_FontName
-        .FontSize = m_FontSize
-        .Bold = m_FontBold
+        .FontSize = 14
+        .Bold = False
         .Enabled = m_Enabled
         .IsHovered = m_IsHovered
         .IsPressed = m_IsPressed
@@ -348,7 +350,34 @@ Private Sub RefreshButton()
         Else
             .BackgroundColor = ConvertColorToARGB(m_BackColor, 255)
         End If
+        .SetTextShadow 0, 1, 2, &H40000000
     End With
+
+'    With m_SkiaButton
+'        .Text = m_Text
+'
+'        .Width = m_PictureBox.ScaleWidth \ Screen.TwipsPerPixelX
+'        .Height = m_PictureBox.ScaleHeight \ Screen.TwipsPerPixelY
+'
+'        .TextColor = ConvertColorToARGB(m_ForeColor, 255)
+'
+'        .BorderColor = ConvertColorToARGB(m_BorderColor, 255)
+'        .BorderWidth = m_BorderWidth
+'        .CornerRadius = m_CornerRadius
+'
+'        .FontFamily = m_FontName
+'        .FontSize = m_FontSize
+'        .Bold = m_FontBold
+'        .Enabled = m_Enabled
+'        .IsHovered = m_IsHovered
+'        .IsPressed = m_IsPressed
+'
+'        If m_UseGradient Then
+'            .SetGradientBackground ConvertColorToARGB(m_GradientStartColor, 255), ConvertColorToARGB(m_GradientEndColor, 255)
+'        Else
+'            .BackgroundColor = ConvertColorToARGB(m_BackColor, 255)
+'        End If
+'    End With
     
     Dim picture As IPictureDisp
     Set picture = m_SkiaButton.RenderButton()
@@ -397,12 +426,12 @@ Private Function ConvertColorToARGB(rgbColor As Long, alpha As Byte) As Long
           Dim r As Byte, g As Byte, b As Byte
           
 1        ConvertColorToARGB = rgbColor
-2         Exit Function
-3         r = rgbColor And &HFF
-4         g = (rgbColor And &HFF00&) \ &H100
-5         b = (rgbColor And &HFF0000) \ &H10000
-          
-6         ConvertColorToARGB = (CLng(alpha) * &H1000000) Or (CLng(b) * &H10000) Or (CLng(g) * &H100) Or CLng(r)
+'2         Exit Function
+'3         r = rgbColor And &HFF
+'4         g = (rgbColor And &HFF00&) \ &H100
+'5         b = (rgbColor And &HFF0000) \ &H10000
+'
+'6         ConvertColorToARGB = (CLng(alpha) * &H1000000) Or (CLng(b) * &H10000) Or (CLng(g) * &H100) Or CLng(r)
 End Function
 
 Private Sub m_PictureBox_Click()

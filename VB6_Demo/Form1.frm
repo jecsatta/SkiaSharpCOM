@@ -55,7 +55,6 @@ Private animTimer As Timer
 Private animStep As Integer
 Private animatingButton As Integer
 
-
 Private Sub Command1_Click()
     Form2.Show
 End Sub

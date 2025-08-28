@@ -48,8 +48,10 @@ Private Sub CreateUserControlButtons()
             .Width = 2500
             .Height = 800
             .Text = "Primary Button"
-            .BackColor = &H4285F4
-            .ForeColor = &HFFFFFF
+            .UseGradient = True
+            .GradientStartColor = &HFF007BFF
+            .GradientEndColor = &HFF0056B3
+            .ForeColor = &HFFFFFFFF
             .CornerRadius = 8
             .FontSize = 12
             .FontBold = False
@@ -65,9 +67,12 @@ Private Sub CreateUserControlButtons()
             .Top = 1500
             .Width = 2500
             .Height = 800
-            .Text = "Gradient Button"
-            .SetGradient &HFF6B6B, &HFF8E53
-            .ForeColor = &HFFFFFF
+            .Text = "Secondary Button"
+            
+            .BackColor = &HFF6C757D
+            .ForeColor = &HFFFFFFFF
+            .BorderColor = &HFF545B62
+            .UseGradient = False
             .CornerRadius = 15
             .FontSize = 14
             .FontBold = True
@@ -83,11 +88,13 @@ Private Sub CreateUserControlButtons()
             .Top = 2500
             .Width = 2500
             .Height = 800
-            .Text = "Custom Style"
-            .BackColor = &H9C27B0
-            .ForeColor = &HFFFFFF
+            .Text = "Danger Style"
+            .GradientStartColor = &HFFDC3545
+            .GradientEndColor = &HFFC82333
+            .UseGradient = True
+            .ForeColor = &HFFFFFFFF
             .BorderColor = &HE91E63
-            .BorderWidth = 3
+            .BorderWidth = 6
             .CornerRadius = 20
             .FontSize = 13
             .FontBold = True
