@@ -38,16 +38,5 @@ namespace SkiaSharpCOM
                 canvas.DrawCircle(x, y, radius, paint);
             }
         }
-
-        [ComVisible(true)]
-        public IPictureDisp ToPicture()
-        {
-            SKImage image = SKImage.FromPixels(_bitmap.PeekPixels());
-
-            SKData encoded = image.Encode();
-            Stream stream = encoded.AsStream();
-            var img = Image.FromStream(stream);
-            return (IPictureDisp)Microsoft.VisualBasic.Compatibility.VB6.Support.ImageToIPictureDisp(img);
-        }
     }
 }
