@@ -1,13 +1,13 @@
 VERSION 5.00
 Begin VB.Form Form2 
    Caption         =   " "
-   ClientHeight    =   3855
+   ClientHeight    =   4485
    ClientLeft      =   60
    ClientTop       =   405
-   ClientWidth     =   6120
+   ClientWidth     =   6915
    LinkTopic       =   "Form2"
-   ScaleHeight     =   3855
-   ScaleWidth      =   6120
+   ScaleHeight     =   4485
+   ScaleWidth      =   6915
    StartUpPosition =   3  'Windows Default
 End
 Attribute VB_Name = "Form2"
@@ -25,9 +25,10 @@ Private WithEvents skiaBtn2 As VBSkiaButton
 Attribute skiaBtn2.VB_VarHelpID = -1
 Private WithEvents skiaBtn3 As VBSkiaButton
 Attribute skiaBtn3.VB_VarHelpID = -1
+Private WithEvents skiaText As VBSkiaTextBox
+Attribute skiaText.VB_VarHelpID = -1
 
 Private Sub Form_Load()
-
     Me.Caption = "Teste SkiaButtonControl"
     Me.Width = 8000
     Me.Height = 6000

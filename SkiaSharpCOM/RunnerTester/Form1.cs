@@ -20,26 +20,30 @@ namespace RunnerTester
         private void Form1_Load(object sender, EventArgs e)
         {
 
-           /*  SkiaSharpCOM.SkiaRenderer renderer = new SkiaSharpCOM.SkiaRenderer();
-             renderer.CreateBitmap(200, 200);
-             renderer.DrawCircle(50, 50, 25, 0, 2, true);
+            /*  SkiaSharpCOM.SkiaRenderer renderer = new SkiaSharpCOM.SkiaRenderer();
+              renderer.CreateBitmap(200, 200);
+              renderer.DrawCircle(50, 50, 25, 0, 2, true);
 
-             pictureBox1.Image = Microsoft.VisualBasic.Compatibility.VB6.Support.IPictureDispToImage(renderer.ToPicture());
-            
+              pictureBox1.Image = Microsoft.VisualBasic.Compatibility.VB6.Support.IPictureDispToImage(renderer.ToPicture());
+
+
+             SkiaSharpCOM.SkiaButton btnPrimary = new SkiaSharpCOM.SkiaButton();
+
+             btnPrimary.Text = "Primary";
+             btnPrimary.Width = 180;
+             btnPrimary.Height = 50;
+
+             btnPrimary.BorderWidth = 0;
+             btnPrimary.CornerRadius = 6;
+             btnPrimary.FontFamily = "Segoe UI";
+             btnPrimary.FontSize = 14;
+             btnPrimary.Bold = false;
+             pictureBox1.Image = Microsoft.VisualBasic.Compatibility.VB6.Support.IPictureDispToImage(btnPrimary.RenderButton());
             */
-            SkiaSharpCOM.SkiaButton btnPrimary = new SkiaSharpCOM.SkiaButton();
-
-            btnPrimary.Text = "Primary";
-            btnPrimary.Width = 180;
-            btnPrimary.Height = 50;
-
-            btnPrimary.BorderWidth = 0;
-            btnPrimary.CornerRadius = 6;
-            btnPrimary.FontFamily = "Segoe UI";
-            btnPrimary.FontSize = 14;
-            btnPrimary.Bold = false;
-            pictureBox1.Image = Microsoft.VisualBasic.Compatibility.VB6.Support.IPictureDispToImage(btnPrimary.RenderButton());
-            
+            SkiaSharpCOM.SkiaTextBox btnPrimary = new SkiaSharpCOM.SkiaTextBox();
+            btnPrimary.Width = 100;
+            btnPrimary.Height = 100;
+            pictureBox1.Image = Microsoft.VisualBasic.Compatibility.VB6.Support.IPictureDispToImage(btnPrimary.RenderTextBox());
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)

@@ -2,6 +2,7 @@ Type=Control
 Reference=*\G{00020430-0000-0000-C000-000000000046}#2.0#0#..\..\..\..\Windows\SysWOW64\stdole2.tlb#OLE Automation
 Reference=*\G{A22DF5E3-B097-46C4-AA41-8DD722D02ABF}#1.0#0#..\SkiaSharpCOM\SkiaSharpCOM\bin\Debug\SkiaSharpCOM.lib#SkiaSharpCOM
 UserControl=VBSkiaButton.ctl
+UserControl=VBSkiaTextBox.ctl
 Startup="(None)"
 HelpFile=""
 Title="SkiaVB"

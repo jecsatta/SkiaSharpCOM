@@ -171,8 +171,8 @@ Public Property Get Text() As String
 1         Text = m_Text
 End Property
 
-Public Property Let Text(ByVal NewText As String)
-1         m_Text = NewText
+Public Property Let Text(ByVal newText As String)
+1         m_Text = newText
 2         PropertyChanged "Text"
 3         If m_Initialized Then RefreshButton
 End Property
@@ -181,7 +181,7 @@ Public Property Get BackColor() As Long
 1         BackColor = m_BackColor
 End Property
 Public Property Get MyPicture() As IPictureDisp
-1         MyPicture = m_PictureBox.picture
+1         Set MyPicture = m_PictureBox.picture
 End Property
 
 Public Property Let BackColor(ByVal NewColor As Long)
@@ -395,7 +395,7 @@ ErrorHandler:
     DrawFallbackButton "error rendering button: " & Err.Number & "-" & Err.Description
 End Sub
 
-Private Sub DrawFallbackButton(Erro As String)
+Private Sub DrawFallbackButton(erro As String)
 1         If Not m_Initialized Or m_PictureBox Is Nothing Then Exit Sub
           
 2         On Error Resume Next
@@ -409,7 +409,7 @@ Private Sub DrawFallbackButton(Erro As String)
 9             .FontBold = m_FontBold
               
        
-10            .ToolTipText = Erro
+10            .ToolTipText = erro
    
               Dim textWidth As Single, textHeight As Single
 11            textWidth = .textWidth(m_Text)
